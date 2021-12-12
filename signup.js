@@ -41,12 +41,15 @@ var port = process.env.PORT || 3000;
 // });
 
 app.get('/', async (req, res) => {
-	file = 'signup.html';
-	fs.readFile(file, function(err, txt) {
-		res.writeHead(200, {'Content-Type': 'text/html'});
-		res.write(txt);
-		res.end();
-	});
+// 	file = 'signup.html';
+// 	fs.readFile(file, function(err, txt) {
+// 		res.writeHead(200, {'Content-Type': 'text/html'});
+// 		res.write(txt);
+// 		res.end();
+// 	});
+	res.writeHead(200, {'Content-Type': 'text/html'});
+	res.write("hello");
+	res.end();
 });
 
 app.post('/addUser', async (req, res) => {
