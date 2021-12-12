@@ -2,10 +2,10 @@
   "name": "final",
   "version": "1.0.0",
   "description": "Reve Au Chocolat",
-  "main": "addUser.js",
+  "main": "signup.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node addUser.js"
+    "start": "node signup.js"
   },
   "author": "",
   "license": "ISC",
