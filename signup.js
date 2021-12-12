@@ -6,8 +6,8 @@ const app = express();
 var auth = require('./logIn.js');
 var add = require('./addUser.js');
 
-
-var port = 8080;
+var port = process.env.PORT || 3000;
+// var port = 8080;
 
 // app.get('/', (req, res) => {
 // 	if (req.url == "/")
