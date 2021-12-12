@@ -40,17 +40,16 @@ var port = process.env.PORT || 3000;
 //    });
 // });
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
 	file = 'signup.html';
 	fs.readFile(file, function(err, txt) {
-		if (err) throw (err);
 		res.writeHead(200, {'Content-Type': 'text/html'});
 		res.write(txt);
 		res.end();
 	});
 });
 
-app.post('/addUser', (req, res) => {
+app.post('/addUser', async (req, res) => {
 	file = 'signup.html';
 
 	pdata = "";
