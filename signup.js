@@ -3,11 +3,14 @@ var fs = require('fs');
 var qs = require('querystring');
 const express = require('express');
 const app = express();
+const {runInContext } = require('vm');
 //var auth = require('https://ajmiller00.github.io/Midterm-signup/logIn.js');
 //var add = require('https://ajmiller00.github.io/Midterm-signup/addUser.js');
 
 var port = process.env.PORT || 3000;
 // var port = 8080;
+
+app.use(express.static('public'));
 
 // app.get('/', (req, res) => {
 // 	if (req.url == "/")
@@ -41,15 +44,15 @@ var port = process.env.PORT || 3000;
 // });
 
 app.get('/', async (req, res) => {
-// 	file = 'signup.html';
-// 	fs.readFile(file, function(err, txt) {
-// 		res.writeHead(200, {'Content-Type': 'text/html'});
-// 		res.write(txt);
-// 		res.end();
-// 	});
+	file = 'signup.html';
+	fs.readFile(file, function(err, txt) {
+		res.writeHead(200, {'Content-Type': 'text/html'});
+		res.write(txt);
+		res.end();
+	});
 	//res.writeHead(200, {'Content-Type': 'text/html'});
-	res.write("hello");
-	res.end();
+	//res.write("hello");
+	//res.end();
 });
 
 app.post('/addUser', async (req, res) => {
