@@ -41,7 +41,7 @@ var port = process.env.PORT || 3000;
 // });
 
 app.get('/', (req, res) => {
-	file = 'https://ajmiller00.github.io/Midterm/signup.html';
+	file = 'signup.html';
 	fs.readFile(file, function(err, txt) {
 		if (err) throw (err);
 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -50,8 +50,8 @@ app.get('/', (req, res) => {
 	});
 });
 
-app.post('/addUser', async (req, res) => {
-	file = 'https://ajmiller00.github.io/Midterm/signup.html';
+app.post('/addUser', (req, res) => {
+	file = 'signup.html';
 
 	pdata = "";
 	req.on('data', data => {
