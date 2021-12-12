@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const {runInContext } = require('vm');
 //var auth = require('https://ajmiller00.github.io/Midterm-signup/logIn.js');
-var add = require('./addUser.js');
+var add = require('addUser.js');
 
 var port = process.env.PORT || 3000;
 // var port = 8080;
