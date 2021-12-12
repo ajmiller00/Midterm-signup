@@ -47,7 +47,7 @@ app.get('/', async (req, res) => {
 // 		res.write(txt);
 // 		res.end();
 // 	});
-	res.writeHead(200, {'Content-Type': 'text/html'});
+	//res.writeHead(200, {'Content-Type': 'text/html'});
 	res.write("hello");
 	res.end();
 });
