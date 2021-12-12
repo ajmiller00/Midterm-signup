@@ -7,7 +7,7 @@ var auth = require('./logIn.js');
 var add = require('./addUser.js');
 
 
-var port = process.env.PORT || 3000;
+var port = 8080;
 
 // app.get('/', (req, res) => {
 // 	if (req.url == "/")
@@ -40,7 +40,7 @@ var port = process.env.PORT || 3000;
 //    });
 // });
 
-app.get('/signup', async (req, res) => {
+app.get('/', async (req, res) => {
 	file = 'signup.html';
 	fs.readFile(file, function(err, txt) {
 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -99,10 +99,11 @@ app.post('/addUser', async (req, res) => {
 		res.write("<li></li><li></li><li><a class = 'burger' href='https://reveauchocolat-cart.herokuapp.com/'>My Cart</a></li></ul></div></header>");
 		res.write("<body>");
 	   if (result != "FAILURE") {
-		   res.write("<div id = 'add'> <br><br><br> Successful Sign Up! <br> <br>");
+		   res.write("<div id = 'add'> <br><br><br> Successful Sign Up! <br><br><br><br><br><br>");
 		   res.write("</div>");
+		   console.log("The result " + result);
 	   } else {
-		   res.write("<div id = 'add'> <br><br><br> Sign Up Failed, Please Try Another Email <br><br><br>");
+		   res.write("<div id = 'add'> <br><br><br> Sign Up Failed, Please Try Another Email <br><br><br><br><br><br>");
 		   res.write("</div>");
 	   }
 	   res.write("<footer>&copy; 2021 Rêve au Chocolat – 23 Fausse Street, Cambridge, MA – (617) 555 0113</footer>")
