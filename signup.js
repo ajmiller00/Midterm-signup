@@ -59,7 +59,7 @@ exports.addUser = async (pdata) => {
 
 
 
-app.use('/', express.static(__dirname));
+app.use(express.static('public'));
 
 app.get('/', async (req, res) => {
 	file = 'signup.html';
