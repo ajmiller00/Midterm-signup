@@ -12,8 +12,54 @@ var crypto = require('crypto');
 var port = process.env.PORT || 3000;
 // var port = 8080;
 
+exports.addUser = async (pdata) => {
+
+    return new Promise((resolve, reject) => {
+        MongoClient.connect(url, { useUnifiedTopology: true }, async (err, db) => {
+          if (err) return reject(err)
+
+          const collection = await (db.db("reveauchocolat").collection('users'));
+          const collc = await (db.db("reveauchocolat").collection('current'));
+
+
+          try {
+           const items = await (await collection.find({"email" : pdata['email']})).toArray()
+           if (items.length > 0) {
+               console.log("Email already exists");
+               await collc.updateOne({ "current" : "current" }, {$set: {"email" : "FAILURE"}});
+               result = "FAILURE"
+           } else {
+               let salt = (Math.random() + 1).toString(36).substring(7);
+               var password = crypto.createHash('md5').update(salt + pdata['pass']).digest('hex');
+               console.log(password);
+               var newData = {"fname":pdata['fname'], "lname":pdata['lname'], "email":pdata['email'], "phone":{"$numberLong":pdata['phone']},"street":pdata['street'], "city":pdata['city'], "state":pdata['state'], "zip":pdata['zip'], "password": password, "cart":[""], "salt":salt};
+
+               await collection.insertOne(newData, function(err, res) {
+                   if(err) { console.log("Insert Error: " + err); return; }
+                   console.log("New document inserted!");
+               });
+               await collc.updateOne({ "current" : "current" }, {$set: {"email" : pdata['email']}});
+               result =  pdata['email'];
+           }
+          } catch (e) {
+            return reject(e)
+          }
+
+          console.log("Success!");
+          db.close();
+          console.log("Print " + result);
+
+          return resolve(result)
+
+        });
+      });
+
+};
+
+
+
+
 app.use('/', express.static(__dirname));
-var add = require('./addUser.js');
 
 app.get('/', async (req, res) => {
 	file = 'signup.html';
@@ -40,7 +86,7 @@ app.post('/addUser', async (req, res) => {
 	   pdata = qs.parse(pdata);
 	   // res.write ("The email is: " + pdata['email'] + "<br>");
 	   // res.write ("The password is: " + pdata['password'] + "<br>");
-	   const result = await add.addUser(pdata);
+	   const result = await exports.addUser(pdata);   
 	   res.writeHead(200, {'Content-Type':'text/html'});
 		res.write("<!DOCTYPE html><html lang='en'><head><script src='https://code.jquery.com/jquery-3.6.0.min.js' integrity='sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=' crossorigin='anonymous'>");
 		res.write("</script><meta charset='UTF-8'><meta name='viewpor' content='width=device-width, initial-scale=1.0'><link rel='preconnect' href='https://fonts.googleapis.com'>");
