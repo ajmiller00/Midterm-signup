@@ -5,43 +5,16 @@ const express = require('express');
 const app = express();
 const {runInContext } = require('vm');
 //var auth = require('https://ajmiller00.github.io/Midterm-signup/logIn.js');
-var add = require('./addUser.js');
+const MongoClient = require('mongodb').MongoClient;
+const url = "mongodb+srv://amille26:cs20final@cluster0.ktqrs.mongodb.net/reveauchocolat?retryWrites=true&w=majority";
+var crypto = require('crypto');
+const csv = require('csv-parser');
 
 var port = process.env.PORT || 3000;
 // var port = 8080;
 
 app.use(express.static('public'));
-
-// app.get('/', (req, res) => {
-// 	if (req.url == "/")
-// 	{
-// 		file = 'login.html';
-// 		fs.readFile(file, function(err, txt) {
-// 			res.writeHead(200, {'Content-Type': 'text/html'});
-// 			res.write(txt);
-// 			res.end();
-// 		});
-// 	}
-// });
-//
-// app.post('/login', async (req, res) => {
-// 	res.writeHead(200, {'Content-Type':'text/html'});
-// 	pdata = "";
-// 	req.on('data', data => {
-// 	  pdata += data.toString();
-// 	});
-//
-//    // when complete POST data is received
-//    req.on('end', async () => {
-// 	   pdata = qs.parse(pdata);
-// 	   res.write ("The email is: "+ pdata['email'] + "<br>");
-// 	   res.write ("The password is: " + pdata['password'] + "<br>");
-// 	   res.write ("The name is: ");
-// 	   const data = await auth.LogInAuth(pdata['email'], pdata['password']);
-// 	   res.write(data);
-// 	   res.end();
-//    });
-// });
+var add = require('/addUser.js');
 
 app.get('/', async (req, res) => {
 	file = 'signup.html';
