@@ -13,7 +13,7 @@ var port = process.env.PORT || 3000;
 // var port = 8080;
 
 app.use('/', express.static(__dirname));
-var add = require('/addUser.js');
+var add = require('./addUser.js');
 
 app.get('/', async (req, res) => {
 	file = 'signup.html';
