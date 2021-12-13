@@ -8,7 +8,6 @@ const {runInContext } = require('vm');
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb+srv://amille26:cs20final@cluster0.ktqrs.mongodb.net/reveauchocolat?retryWrites=true&w=majority";
 var crypto = require('crypto');
-const csv = require('csv-parser');
 
 var port = process.env.PORT || 3000;
 // var port = 8080;
